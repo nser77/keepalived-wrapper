@@ -1,11 +1,9 @@
 # keepalived-wrapper
 Minimalist pure Python [Keepalived](https://keeaplived.org) wrapper.
 
-If Keepalived is compiled with ```--JSON``` option, this wrapper will get JSON data from runnings VRRP instances.
+If Keepalived is compiled with ```--JSON``` option, this wrapper will get JSON data from runnings VRRP instance(s).
 
-## TO-DO
-- [X] Starting from commit [e1593ef](https://github.com/acassen/keepalived/commit/e1593effaf4395e208947897d9fb0adaee484eae), Keepalived changed his JSON format, please update the class Keepalived.
-- Starting from commit [e1593ef](https://github.com/acassen/keepalived/commit/e1593effaf4395e208947897d9fb0adaee484eae), Keepalived added VRRP ```track_process``` details as separated object in JSON output.
+Starting from commit [e1593ef](https://github.com/acassen/keepalived/commit/e1593effaf4395e208947897d9fb0adaee484eae), Keepalived added ```json_version``` option in ```global_def``` configuration section.
 
 ## Project's goals:
 - Pure Python Keepalived wrapper.

@@ -1,0 +1,1 @@
+from keepalived.keepalived import KeepalivedInterface

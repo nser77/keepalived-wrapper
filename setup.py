@@ -16,10 +16,7 @@ setup(
     python_requires=">=3.8.0",
     url="https://github.com/nser77/keepalived-wrapper",
     packages=find_packages(),
-    #packages=["keepalived"],
-    #install_requires=[],
-    #extras_require=[],
-    include_package_data=True,
+    #include_package_data=True,
     license='MIT',
     classifiers=[
         'License :: OSI Approved :: MIT License',

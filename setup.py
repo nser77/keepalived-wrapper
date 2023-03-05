@@ -15,7 +15,7 @@ setup(
     author_email="",
     python_requires=">=3.8.0",
     url="https://github.com/nser77/keepalived-wrapper",
-    packages=find_packages(include=['kw']),
+    packages=find_packages(include=['keepalived']),
     #include_package_data=True,
     license='MIT',
     classifiers=[

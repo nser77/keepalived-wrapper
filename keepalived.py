@@ -139,5 +139,5 @@ class KeepalivedInterface():
         with open(KeepalivedInterface.getTmpFile()) as json:
             j=load(json)
             if j:
-			    for instance in j:
-				    yield Keepalived(instance['data'], instance['stats'])
+	        for instance in j:
+                    yield Keepalived(instance['data'], instance['stats'])

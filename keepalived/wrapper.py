@@ -124,11 +124,13 @@ class KeepalivedInterface():
 
     @staticmethod
     def getSigfunc():
+        # if keepalived is not running, this method will fail.
         command='kill -s $(keepalived --signum=JSON) $(cat {pid})'.format(pid=KeepalivedInterface.pid)
         return command
 
     @staticmethod
     def getTmpFile():
+        # if keepalived is not running, this method will fail.
         p = KeepalivedInterface._readSubprocess('ls /tmp | grep -i keepalived | grep -iv /').split(b"\n")
         return "/tmp/{}/tmp/keepalived.json".format(p[0].decode("utf-8"))
 

@@ -18,7 +18,7 @@ pip install git+https://github.com/nser77/keepalived-wrapper.git
 ```
 from keepalived.wrapper import KeepalivedInterface
 
-for k in KeepalivedInterface.getKeepalived()
+for k in KeepalivedInterface.getVrrp()
     print(k.iname)
     
 >>> VI_1

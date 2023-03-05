@@ -140,4 +140,4 @@ class KeepalivedInterface():
             j=load(json)
             if j:
                 for instance in j:
-                    yield Keepalived(instance['data'], instance['stats'])
+                    yield Keepalived(instance['vrrp']['data'], instance['vrrp']['stats'])

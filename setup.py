@@ -11,7 +11,7 @@ setup(
     url="https://github.com/nser77/keepalived-wrapper",
     license="MIT",
     long_description=long_description,
-    author="KimiNewt",
+    author="nser77",
     description="Python wrapper for Keepalived",
     keywords="keepalived python wrapper",
 

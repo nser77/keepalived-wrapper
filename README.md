@@ -9,9 +9,14 @@ If Keepalived is compiled with ```--JSON``` option, this wrapper will get JSON d
 - Streaming messages to message brokers.
 - Simple integration with third-party software.
 
+## Installation
+```
+pip install git+https://github.com/nser77/keepalived-wrapper.git
+```
+
 ## Usage
 ```
-from keepalived import KeepalivedInterface
+from keepalived.wrapper import KeepalivedInterface
 
 for k in KeepalivedInterface.getKeepalived()
     print(k.iname)

@@ -1,3 +1,5 @@
+import tempfile
+
 import subprocess
 from subprocess import Popen, PIPE
 
@@ -96,6 +98,7 @@ class KeepalivedInterface():
 
     @staticmethod
     def getTmpFile():
+        print(tempfile.gettempdir()) # prints the current temporary directory
         p = KeepalivedInterface._readSubprocess('ls /tmp | grep -i keepalived | grep -iv /').split(b"\n")
         return "/tmp/{}/tmp/keepalived.json".format(p[0].decode("utf-8"))
 

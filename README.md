@@ -13,9 +13,11 @@ If Keepalived is compiled with ```--JSON``` option, this wrapper will get JSON d
 ```
 from keepalived import KeepalivedInterface
 
-k = KeepalivedInterface.getKeepalived()
-print(k.iname)
+for k in KeepalivedInterface.getKeepalived()
+    print(k.iname)
+    
 >>> VI_1
+>>> VI_n
 ```
 
 ## Keepalived VRRP JSON output:

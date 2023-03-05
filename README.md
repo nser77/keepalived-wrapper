@@ -1,5 +1,5 @@
 # keepalived-wrapper
-Minimalist pure Python [Keepalived](https://keeaplived.org) wrapper.
+Minimalist pure Python [Keepalived](https://keepalived.org) wrapper.
 
 If Keepalived is compiled with ```--JSON``` option, this wrapper will get JSON data from runnings VRRP instance(s).
 

@@ -136,7 +136,7 @@ class KeepalivedInterface():
         return "/tmp/{}/tmp/keepalived.json".format(p[0].decode("utf-8"))
 
     @staticmethod
-    def getKeepalived():
+    def getVrrp():
         if not KeepalivedInterface._runSubprocess(KeepalivedInterface.getSigfunc()):
             raise Except("Subprocess error")
         with open(KeepalivedInterface.getTmpFile()) as json:

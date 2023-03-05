@@ -138,4 +138,6 @@ class KeepalivedInterface():
             raise Except("Subprocess error")
         with open(KeepalivedInterface.getTmpFile()) as json:
             j=load(json)
-            return Keepalived(j)
+            if j:
+			    for instance in j:
+				    yield Keepalived(instance['data'], instance['stats'])

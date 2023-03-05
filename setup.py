@@ -15,7 +15,7 @@ setup(
     author_email="",
     python_requires=">=3.8.0",
     url="https://github.com/nser77/keepalived-wrapper",
-    py_modules=['keepalived-wrapper'],
+    py_modules=['keepalived'],
     #install_requires=[],
     #extras_require=[],
     include_package_data=True,

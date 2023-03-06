@@ -91,39 +91,6 @@ class KeepalivedInterface():
 
     @staticmethod
     def getSigfunc():
-        command='kill -s $(keepalived --signum=JSON) $(cat {pid})'.format(pid=KeepalivedInterface.pid)
-        return command
-
-    @staticmethod
-    def getTmpFile():
-        p = KeepalivedInterface._readSubprocess('ls /tmp | grep -i keepalived | grep -iv /').split(b"\n")
-        return "/tmp/{}/tmp/keepalived.json".format(p[0].decode("utf-8"))
-
-    @staticmethod
-    def getKeepalived():
-        if not KeepalivedInterface._runSubprocess(KeepalivedInterface.getSigfunc()):
-            raise Except("Subprocess error")
-        with open(KeepalivedInterface.getTmpFile()) as json:
-            j=load(json)
-            return Keepalived(j)
-
-class KeepalivedInterface():
-    pid = '/run/keepalived/keepalived.pid'
-
-    @staticmethod
-    def _readSubprocess(command):
-        with Popen(command, shell=True, stdout=PIPE) as p:
-            p.wait()
-            return p.communicate()[0]
-
-    @staticmethod
-    def _runSubprocess(command):
-        with Popen(command, shell=True) as p:
-            p.wait()
-            return p
-
-    @staticmethod
-    def getSigfunc():
         # if keepalived is not running, this method will fail.
         command='kill -s $(keepalived --signum=JSON) $(cat {pid})'.format(pid=KeepalivedInterface.pid)
         return command

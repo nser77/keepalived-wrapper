@@ -143,7 +143,7 @@ class KeepalivedInterface():
             if j:
                 try:
                     if j['vrrp']:
-                        for instance in j['vvrp']:
+                        for instance in j['vrrp']:
                             yield Keepalived(instance['data'], instance['stats'])
                 except:
                     for instance in j:

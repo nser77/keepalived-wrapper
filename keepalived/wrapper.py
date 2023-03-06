@@ -135,7 +135,7 @@ class KeepalivedInterface():
         return "/tmp/{}/tmp/keepalived.json".format(p[0].decode("utf-8"))
 
     @staticmethod
-    def getVrrp():
+    def getVrrp(instance_filter):
         if not KeepalivedInterface._runSubprocess(KeepalivedInterface.getSigfunc()):
             raise Except("Subprocess error")
         with open(KeepalivedInterface.getTmpFile()) as json:
@@ -144,7 +144,9 @@ class KeepalivedInterface():
                 try:
                     if j['vrrp']:
                         for instance in j['vvrp']:
-                            yield Keepalived(instance['data'], instance['stats'])
+                            if instance_filter == instance["data"]["iname"]:
+                                yield Keepalived(instance['data'], instance['stats'])
                 except:
                     for instance in j:
-                        yield Keepalived(instance['data'], instance['stats'])                    
+                        if instance_filter == instance["data"]["iname"]:
+                            yield Keepalived(instance['data'], instance['stats'])                    

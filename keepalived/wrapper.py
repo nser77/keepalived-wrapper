@@ -78,7 +78,7 @@ class KeepalivedInterface():
 
     @staticmethod
     def isRunning():
-        if SystemdInterface.systemctlGetMainPID("keepalived") == 0:
+        if SystemdInterface.getMainPID("keepalived") == 0:
             return False
         return True
 

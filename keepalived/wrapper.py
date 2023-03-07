@@ -106,3 +106,6 @@ class KeepalivedInterface():
                     except:
                         for instance in j:
                             yield Keepalived(instance['data'], instance['stats'])                    
+        else:
+            print("Is Keepalived running?")
+            return False

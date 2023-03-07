@@ -44,7 +44,10 @@ class KeepalivedData(KeepalivedBase):
         self.smtp_alert =              data['smtp_alert']
         self.notify_deleted =          data['notify_deleted']
         self.vips =                    data['vips']
-        self.track_process =           data['track_process']
+        try:
+            self.track_process =           data['track_process']
+        except:
+            pass
 
     def setLastTransition(self, last_transition):
         if last_transition:
@@ -75,41 +78,40 @@ class KeepalivedInterface():
 
     @staticmethod
     def isRunning():
-        # if KeepalivedInterface.getPidFile() 
-        # return true
-        pass
+        if SystemdInterface.systemctlGetMainPID("keepalived") == 0:
+            return False
+        return True
 
     @staticmethod
     def getPidFile():
-        # command = "systemctl show keepalived -p MainPID --value" -> 0 if not running
-        # double condition: MainPID <> 0 and PIDFile exists
         # PIDFile will be returned even if process is not running
         command = "systemctl show keepalived -p PIDFile --value"
         pass
         
     @staticmethod
     def getSigfunc():
-        # if keepalived is not running, this method will fail.
+        #if KeepalivedInterface.isRunning():
         command='kill -s $(keepalived --signum=JSON) $(cat {pid})'.format(pid=KeepalivedInterface.pid)
         return command
 
     @staticmethod
     def getTmpFile():
-        # if keepalived is not running, this method will fail.
+        #if KeepalivedInterface.isRunning():
         p = LinuxInterface._readSubprocess('ls /tmp | grep -i keepalived | grep -iv /').split(b"\n")
         return "/tmp/{}/tmp/keepalived.json".format(p[0].decode("utf-8"))
 
     @staticmethod
     def getVrrp():
-        if not LinuxInterface._runSubprocess(KeepalivedInterface.getSigfunc()):
-            raise Except("Subprocess error")
-        with open(KeepalivedInterface.getTmpFile()) as json:
-            j=load(json)
-            if j:
-                try:
-                    if j['vrrp']:
-                        for instance in j['vrrp']:
-                            yield Keepalived(instance['data'], instance['stats'])
-                except:
-                    for instance in j:
-                        yield Keepalived(instance['data'], instance['stats'])                    
+        if KeepalivedInterface.isRunning():
+            if not LinuxInterface._runSubprocess(KeepalivedInterface.getSigfunc()):
+                raise Except("Subprocess error")
+            with open(KeepalivedInterface.getTmpFile()) as json:
+                j=load(json)
+                if j:
+                    try:
+                        if j['vrrp']:
+                            for instance in j['vrrp']:
+                                yield Keepalived(instance['data'], instance['stats'])
+                    except:
+                        for instance in j:
+                            yield Keepalived(instance['data'], instance['stats'])                    

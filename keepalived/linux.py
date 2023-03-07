@@ -21,7 +21,13 @@ class LinuxInterface():
 
 class SystemdInterface():
   @staticmethod
-  def systemctlGetPID(service):
+  def systemctlGetPIDFile(service):
     command = "systemctl show {service} -p PIDFile --value".format(service=service)
     r = LinuxInterface._readSubprocess(command)
-    return(int(r[0]))
+    return(str(r[0]))
+
+  @staticmethod
+  def systemctlGetMainPID(service):
+    command = "systemctl show {service} -p MainPID --value".format(service=service)
+    r = LinuxInterface._readSubprocess(command)
+    return(str(r[0]))

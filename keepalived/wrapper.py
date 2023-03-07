@@ -83,12 +83,6 @@ class KeepalivedInterface():
         return True
 
     @staticmethod
-    def getPidFile():
-        # PIDFile will be returned even if process is not running
-        command = "systemctl show keepalived -p PIDFile --value"
-        pass
-        
-    @staticmethod
     def getSigfunc():
         #if KeepalivedInterface.isRunning():
         command='kill -s $(keepalived --signum=JSON) $(cat {pid})'.format(pid=KeepalivedInterface.pid)

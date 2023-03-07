@@ -21,13 +21,18 @@ class LinuxInterface():
 
 class SystemdInterface():
   @staticmethod
-  def systemctlGetPIDFile(service):
-    command = "systemctl show {service} -p PIDFile --value".format(service=service)
-    r = LinuxInterface._readSubprocess(command).split(b"\n")
+  def systemctlShowCommand(service, property):
+    command = "systemctl show {service} -p {property} --value".format(service=service, property=property)
+    return(str(command))
+
+  @staticmethod
+  def getPIDFile(service):
+    #command = "systemctl show {service} -p PIDFile --value".format(service=service)
+    r = LinuxInterface._readSubprocess(SystemdInterface.systemctlShowCommand(service, 'PIDFile')).split(b"\n")
     return(str(r[0]))
 
   @staticmethod
-  def systemctlGetMainPID(service):
+  def getMainPID(service):
     command = "systemctl show {service} -p MainPID --value".format(service=service)
     r = LinuxInterface._readSubprocess(command).split(b"\n")
     return(int(r[0]))

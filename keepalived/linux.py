@@ -30,4 +30,4 @@ class SystemdInterface():
   def systemctlGetMainPID(service):
     command = "systemctl show {service} -p MainPID --value".format(service=service)
     r = LinuxInterface._readSubprocess(command)
-    return(str(r[0]))
+    return(int(r[0]))

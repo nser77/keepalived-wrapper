@@ -77,18 +77,6 @@ class KeepalivedInterface():
     pid = '/run/keepalived/keepalived.pid'
 
     @staticmethod
-    def _readSubprocess(command):
-        with Popen(command, shell=True, stdout=PIPE) as p:
-            p.wait()
-            return p.communicate()[0]
-
-    @staticmethod
-    def _runSubprocess(command):
-        with Popen(command, shell=True) as p:
-            p.wait()
-            return p
-
-    @staticmethod
     def isRunning():
         # if KeepalivedInterface.getPidFile() 
         # return true

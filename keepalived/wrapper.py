@@ -74,8 +74,6 @@ class Keepalived(KeepalivedData, KeepalivedStats):
         self.stats(stats)
 
 class KeepalivedInterface():
-    pid = '/run/keepalived/keepalived.pid'
-
     @staticmethod
     def isRunning():
         if SystemdInterface.getMainPID("keepalived") == 0:

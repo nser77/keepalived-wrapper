@@ -28,7 +28,7 @@ class SystemdInterface():
   @staticmethod
   def getPIDFile(service):
     r = LinuxInterface._readSubprocess(SystemdInterface.systemctlShowCommand(service, 'PIDFile')).split(b"\n")
-    return(str(r[0]))
+    return(r[0].decode("utf-8"))
 
   @staticmethod
   def getMainPID(service):

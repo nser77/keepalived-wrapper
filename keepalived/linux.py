@@ -33,6 +33,6 @@ class SystemdInterface():
 
   @staticmethod
   def getMainPID(service):
-    command = "systemctl show {service} -p MainPID --value".format(service=service)
-    r = LinuxInterface._readSubprocess(command).split(b"\n")
+    #command = "systemctl show {service} -p MainPID --value".format(service=service)
+    r = LinuxInterface._readSubprocess(SystemdInterface.systemctlShowCommand(service, 'MainPID')).split(b"\n")
     return(int(r[0]))

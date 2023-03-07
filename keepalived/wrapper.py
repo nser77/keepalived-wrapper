@@ -88,14 +88,17 @@ class KeepalivedInterface():
         with Popen(command, shell=True) as p:
             p.wait()
             return p
+
     @staticmethod
     def isRunning():
-        # if KeepalivedInterface.getPidFile() file exists 
+        # if KeepalivedInterface.getPidFile() 
         # return true
         pass
-        
+
     @staticmethod
     def getPidFile():
+        # command = "systemctl show keepalived -p MainPID --value" -> 0 if not running
+        # double condition: MainPID <> 0 and PIDFile exists
         # PIDFile will be returned even if process is not running
         command = "systemctl show keepalived -p PIDFile --value"
         pass

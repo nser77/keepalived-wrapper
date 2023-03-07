@@ -1,5 +1,6 @@
 from .linux import LinuxInterface, SystemdInterface
 from datetime import datetime
+from json import load
 
 class KeepalivedBase(object):
     errors = []

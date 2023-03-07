@@ -19,5 +19,5 @@ class LinuxInterface():
     r = LinuxInterface._readSubprocess('cat /proc/sys/net/ipv4/ip_nonlocal_bind').split(b"\n")
     return(int(r[0]))
 
-class SystemdInterface(LinuxInterface):
+class SystemdInterface():
   pass

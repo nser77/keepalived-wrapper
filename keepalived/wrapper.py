@@ -1,5 +1,4 @@
-import subprocess
-from subprocess import Popen, PIPE
+from linux import LinuxInterface, SystemdInterface
 
 from datetime import datetime
 
@@ -112,12 +111,12 @@ class KeepalivedInterface():
     @staticmethod
     def getTmpFile():
         # if keepalived is not running, this method will fail.
-        p = KeepalivedInterface._readSubprocess('ls /tmp | grep -i keepalived | grep -iv /').split(b"\n")
+        p = LinuxInterface._readSubprocess('ls /tmp | grep -i keepalived | grep -iv /').split(b"\n")
         return "/tmp/{}/tmp/keepalived.json".format(p[0].decode("utf-8"))
 
     @staticmethod
     def getVrrp():
-        if not KeepalivedInterface._runSubprocess(KeepalivedInterface.getSigfunc()):
+        if not LinuxInterface._runSubprocess(KeepalivedInterface.getSigfunc()):
             raise Except("Subprocess error")
         with open(KeepalivedInterface.getTmpFile()) as json:
             j=load(json)

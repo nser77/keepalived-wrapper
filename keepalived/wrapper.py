@@ -1,4 +1,4 @@
-from linux import LinuxInterface, SystemdInterface
+from .linux import LinuxInterface, SystemdInterface
 
 from datetime import datetime
 

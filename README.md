@@ -3,7 +3,7 @@ Minimalist pure Python [KEEPALIVED](https://github.com/acassen/keepalived) wrapp
 
 If KEEPALIVED is compiled with ```--enable-json``` option, this wrapper will get JSON data from runnings VRRP instance(s).
 
-Starting from commit [```e1593ef```](https://github.com/acassen/keepalived/commit/e1593effaf4395e208947897d9fb0adaee484eae), Keepalived added ```json_version``` option in ```global_def``` configuration section.
+Starting from commit [```e1593ef```](https://github.com/acassen/keepalived/commit/e1593effaf4395e208947897d9fb0adaee484eae), KEEPALIVED added ```json_version``` option in ```global_def``` configuration section.
 
 ## Project's goals:
 - Pure Python Keepalived wrapper.

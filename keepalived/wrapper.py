@@ -84,13 +84,11 @@ class KeepalivedInterface():
 
     @staticmethod
     def getSigfunc():
-        #if KeepalivedInterface.isRunning():
-        command='kill -s $(keepalived --signum=JSON) $(cat {pid})'.format(pid=KeepalivedInterface.pid)
+        command='kill -s $(keepalived --signum=JSON) $(cat {pid})'.format(pid=SystemdInterface.getPIDFile("keepalived"))
         return command
 
     @staticmethod
     def getTmpFile():
-        #if KeepalivedInterface.isRunning():
         p = LinuxInterface._readSubprocess('ls /tmp | grep -i keepalived | grep -iv /').split(b"\n")
         return "/tmp/{}/tmp/keepalived.json".format(p[0].decode("utf-8"))
 

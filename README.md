@@ -20,9 +20,9 @@ pip install git+https://github.com/nser77/keepalived-wrapper.git
 ```
 from keepalived.wrapper import KeepalivedInterface
 
-for k in KeepalivedInterface.getVrrp()
-    print(k.iname)
+for k in KeepalivedInterface.getVrrp():
+    print(k.iname, k.last_transition, k.adver_int)
     
->>> VI_1
->>> VI_n
+>>> VI_1, '2023-03-08 19:30:57', 1
+>>> VI_n, ...
 ```

@@ -1,7 +1,21 @@
+from os import kill
+
 import subprocess
 from subprocess import Popen, PIPE
 
+from time import sleep
+
 class LinuxInterface():
+  signals = [36]
+
+  @staticmethod
+  def _killProcess(pid_file, signal):
+    # TODO: check if pid file exists
+    if signal in LinuxInterface.signals:
+      if kill(pid_file, signal):
+        sleep(0.001)
+        return True
+
   @staticmethod
   def _readSubprocess(command):
       with Popen(command, shell=True, stdout=PIPE) as p:

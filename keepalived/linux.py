@@ -13,7 +13,7 @@ class LinuxInterface():
     # TODO: check if pid_file exists
     if signal in LinuxInterface.signals:
       with open(pid_file, "r") as f:
-        pid=int(f.read())
+        pid = int(f.read())
       if pid >= 1:
         kill(pid, signal)
         sleep(0.001)
@@ -34,8 +34,9 @@ class LinuxInterface():
 
   @staticmethod
   def getIpv4NonLocalBind():
-    r = LinuxInterface._readSubprocess('cat /proc/sys/net/ipv4/ip_nonlocal_bind').split(b"\n")
-    return(int(r[0]))
+      with open("/proc/sys/net/ipv4/ip_nonlocal_bind", "r") as f:
+          content = f.read().split("\n")
+          return content[0]
 
 class SystemdInterface():
   @staticmethod

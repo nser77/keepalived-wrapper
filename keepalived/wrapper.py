@@ -76,36 +76,38 @@ class Keepalived(KeepalivedData, KeepalivedStats):
 
 class KeepalivedInterface():
     @staticmethod
-    def isRunning():
+    def isKeepalivedRunning():
         if SystemdInterface.getMainPID("keepalived") == 0:
             return False
         return True
 
     @staticmethod
-    def getSigfunc():
-        command='kill -s $(keepalived --signum=JSON) $(cat {pid})'.format(pid=SystemdInterface.getPIDFile("keepalived"))
-        return command
+    def getKeepalivedData():
+        if not LinuxInterface.killProcess(SystemdInterface.getPIDFile("keepalived"), 36):
+            print('error')
+            return False
+        return True
 
     @staticmethod
-    def getTmpFile():
+    def getKeepalivedJsonTmpFile():
         p = LinuxInterface._readSubprocess('ls /tmp | grep -i keepalived').split(b"\n")
         return "/tmp/{}/tmp/keepalived.json".format(p[0].decode("utf-8"))
 
     @staticmethod
     def getVrrp():
-        if KeepalivedInterface.isRunning():
-            if not LinuxInterface._runSubprocess(KeepalivedInterface.getSigfunc()):
-                raise Except("Subprocess error")
-            with open(KeepalivedInterface.getTmpFile()) as json:
-                j=load(json)
-                if j:
-                    try:
-                        if j['vrrp']:
-                            for instance in j['vrrp']:
-                                yield Keepalived(instance['data'], instance['stats'])
-                    except:
-                        for instance in j:
-                            yield Keepalived(instance['data'], instance['stats'])                    
-        else:
-            print("Is Keepalived running?")
+        if not KeepalivedInterface.isKeepalivedRunning():
             return False
+
+        if not KeepalivedInterface.getKeepalivedData():
+            return False
+
+        with open(KeepalivedInterface.getKeepalivedJsonTmpFile()) as json:
+            j=load(json)
+            if j:
+                try:
+                    if j['vrrp']:
+                        for instance in j['vrrp']:
+                            yield Keepalived(instance['data'], instance['stats'])
+                except:
+                    for instance in j:
+                        yield Keepalived(instance['data'], instance['stats'])

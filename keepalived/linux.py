@@ -15,9 +15,10 @@ class LinuxInterface():
       with open(pid_file, "r") as f:
         pid=int(f.read())
       if pid >= 1:
-        if kill(pid_file, signal):
-          sleep(0.001)
-          return True
+        kill(pid, signal)
+        sleep(0.001)
+        return True
+    return False
 
   @staticmethod
   def _readSubprocess(command):

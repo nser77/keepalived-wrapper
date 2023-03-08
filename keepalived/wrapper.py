@@ -83,8 +83,7 @@ class KeepalivedInterface():
 
     @staticmethod
     def getKeepalivedData():
-        if not LinuxInterface.killProcess(SystemdInterface.getPIDFile("keepalived"), 36):
-            print('error')
+        if not LinuxInterface._killProcess(SystemdInterface.getPIDFile("keepalived"), 36):
             return False
         return True
 

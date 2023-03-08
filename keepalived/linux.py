@@ -10,11 +10,14 @@ class LinuxInterface():
 
   @staticmethod
   def _killProcess(pid_file, signal):
-    # TODO: check if pid file exists
+    # TODO: check if pid_file exists
     if signal in LinuxInterface.signals:
-      if kill(pid_file, signal):
-        sleep(0.001)
-        return True
+      with open(pid_file, "r") as f:
+        pid=int(f.read())
+      if pid >= 1:
+        if kill(pid_file, signal):
+          sleep(0.001)
+          return True
 
   @staticmethod
   def _readSubprocess(command):
